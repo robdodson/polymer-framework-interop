@@ -31,6 +31,8 @@ occur inside of a Polymer element.
 ![An arrow pointing from Angular to Polymer and an arrow with a slash through
 it point from Polymer to Angular](https://s3.amazonaws.com/media-p.slid.es/uploads/387002/images/1944519/dataflow.jpeg)
 
+_image by [Josh Crowther](http://slides.com/jshcrowthe/polymer-webcomponents-and-angularjs#/)_
+
 ### Solution
 The [angular-poly-grip](https://github.com/robdodson/angular-poly-grip)
 directive can be used to fix the linkage between Polymer elements and Angular
