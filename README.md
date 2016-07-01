@@ -23,7 +23,7 @@ to figure out where things don't quite line up. So if you're interested please:
 
 ### Two-way Data Binding
 
-### Problem
+#### Problem
 Out of the box, data binding to a Polymer element from an Angular controller
 will only work one-way. Angular is not able to hear about property changes that
 occur inside of a Polymer element.
@@ -33,12 +33,44 @@ it point from Polymer to Angular](https://s3.amazonaws.com/media-p.slid.es/uploa
 
 _image by [Josh Crowther](http://slides.com/jshcrowthe/polymer-webcomponents-and-angularjs#/)_
 
-### Solution
+#### Solution
 The [angular-poly-grip](https://github.com/robdodson/angular-poly-grip)
 directive can be used to fix the linkage between Polymer elements and Angular
 controllers so two-way binding works again. This directive listens for the
 property changed events that Polymer fires and uses those events to update
 the Angular scope with the new value.
 
-### Example
+#### Example
 [Try it on Plunkr](https://plnkr.co/edit/1wmaOehXrtd6k0GsGOeQ?p=preview)
+
+---
+
+### Transclusion Scopes
+
+#### Problem
+If you use `ng-transclude`, or you're in any situation in which you might be
+creating a new inherited scope, you'll need to be careful when using primitive
+values like `String` or `Number` in your bindings. These values will be copied
+from the original scope (instead of referenced) and this will cause
+`angular-poly-grip` to stop working.
+
+#### Solution
+Instead of using the primitive value in your binding, use a reference to the
+current scope object.
+
+**Bad**:
+```html
+<body ng-controller="MainCtrl">
+  <my-element foo="{{message}}" poly-grip></my-element>
+</body>
+```
+
+**Good**:
+```html
+<body ng-controller="MainCtrl as main">
+  <my-element foo="{{main.message}}" poly-grip></my-element>
+</body>
+```
+
+#### Example
+[Try it on Plunkr](https://plnkr.co/edit/zj5SO6J8kmc6PH8fNqbJ?p=preview)
